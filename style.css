@@ -55,7 +55,7 @@ a {
     position: sticky;
     z-index: 10;
     top: 0;
-    background: #b6d0ff;
+    background: var(--navy);
     box-shadow: 0 4px 20px rgba(16, 43, 70, .08);
     backdrop-filter: blur(12px);
 }
@@ -77,13 +77,47 @@ a {
     gap: 12px;
 }
 
+.nav-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 8px;
+    color: var(--white);
+    background: transparent;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+    background: rgba(49, 197, 214, .2);
+}
+
+.nav-toggle:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 3px;
+}
+
 .nav-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 9px 13px;
     border-radius: 7px;
-    color: #536274;
+    color: rgba(255, 255, 255, .86);
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
@@ -102,8 +136,8 @@ a {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--blue-dark);
-    background: #edf5fb;
+    color: var(--white);
+    background: rgba(49, 197, 214, .2);
 }
 
 .nav-logo {
@@ -465,10 +499,28 @@ h1 span {
     color: #e4f2fb;
 }
 
+.work-copy {
+    display: none;
+    width: min(720px, calc(100% - 48px));
+    margin: 0 auto 28px;
+    color: #e4f2fb;
+}
+
+.work-copy p {
+    margin-bottom: 12px;
+}
+
+.work-copy p:last-child {
+    margin-bottom: 0;
+}
+
 .photo-gallery {
-    position: relative;
     width: 100%;
     margin: 0;
+}
+
+.gallery-carousel {
+    position: relative;
 }
 
 .gallery-track {
@@ -483,6 +535,7 @@ h1 span {
     height: clamp(270px, 39vw, 465px);
     margin: 0;
     overflow: hidden;
+    border-radius: 9px;
     border: 1px solid #e3eaf0;
     background: #fff;
     box-shadow: 0 16px 36px rgba(16, 43, 70, .2), 0 4px 10px rgba(16, 43, 70, .08);
@@ -510,6 +563,7 @@ h1 span {
 .gallery-track.is-carousel {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: clamp(2px, .25vw, 4px);
     min-height: 371px;
 }
@@ -518,6 +572,7 @@ h1 span {
     display: none;
     flex: 0 0 16%;
     height: clamp(180px, 21.4vw, 259px);
+    border-radius: 0;
     opacity: .76;
     transition: opacity .25s ease, transform .25s ease;
 }
@@ -543,6 +598,82 @@ h1 span {
     opacity: 1;
 }
 
+.gallery-secondary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.gallery-secondary .gallery-slide {
+    height: clamp(270px, 28vw, 390px);
+    padding: 4px;
+    border: 1px solid var(--photo-accent, #1768b2);
+    border-radius: 10px;
+    background: linear-gradient(145deg, var(--photo-wash, #eaf3fc), #fff 72%);
+    box-shadow: 0 8px 18px rgba(16, 43, 70, .1);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.gallery-secondary .gallery-photo-1 {
+    --photo-accent: #1768b2;
+    --photo-wash: #eaf3fc;
+}
+
+.gallery-secondary .gallery-photo-2 {
+    --photo-accent: #159b83;
+    --photo-wash: #e8f7f2;
+}
+
+.gallery-secondary .gallery-photo-3 {
+    --photo-accent: #d18a1c;
+    --photo-wash: #fff7e8;
+}
+
+.gallery-secondary .gallery-photo-4 {
+    --photo-accent: #7756c8;
+    --photo-wash: #f3efff;
+}
+
+.gallery-secondary .gallery-photo-5 {
+    --photo-accent: #d65b78;
+    --photo-wash: #fff0f3;
+}
+
+.gallery-secondary .gallery-photo-6 {
+    --photo-accent: #368b50;
+    --photo-wash: #eff8ed;
+}
+
+.gallery-secondary .gallery-photo-7 {
+    --photo-accent: #db643b;
+    --photo-wash: #fff1e9;
+}
+
+.gallery-secondary .gallery-photo-8 {
+    --photo-accent: #2585c5;
+    --photo-wash: #edf7ff;
+}
+
+.gallery-secondary .gallery-photo-9 {
+    --photo-accent: #158b9a;
+    --photo-wash: #e8f8fa;
+}
+
+.gallery-secondary .gallery-photo-10 {
+    --photo-accent: #9b6a2d;
+    --photo-wash: #fbf3e8;
+}
+
+.gallery-secondary .gallery-slide[role="button"] {
+    cursor: pointer;
+}
+
+.gallery-secondary .gallery-slide:focus-visible {
+    outline: 3px solid var(--photo-accent, #1768b2);
+    outline-offset: 3px;
+}
+
 .gallery-arrow {
     position: absolute;
     z-index: 2;
@@ -559,6 +690,14 @@ h1 span {
     box-shadow: 0 5px 22px rgba(16, 43, 70, .18);
     cursor: pointer;
     transform: translateY(-50%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .gallery-secondary .gallery-slide:hover {
+        z-index: 1;
+        transform: translateY(-6px) scale(1.04);
+        box-shadow: 0 22px 42px rgba(16, 43, 70, .3), 0 5px 14px rgba(16, 43, 70, .12);
+    }
 }
 
 .gallery-arrow:hover {
@@ -598,6 +737,7 @@ h1 span {
 }
 
 .gallery-slide[role="button"] {
+    cursor: pointer;
     touch-action: manipulation;
 }
 
@@ -929,6 +1069,10 @@ h1 span {
     text-decoration: none;
 }
 
+.home-contact-details {
+    display: none;
+}
+
 @media (max-width: 760px) {
     html {
         scroll-padding-top: 82px;
@@ -938,9 +1082,9 @@ h1 span {
         width: calc(100% - 28px);
         min-height: 0;
         grid-template-areas:
-            "logo whatsapp"
-            "links links";
-        grid-template-columns: 1fr auto;
+            "logo whatsapp toggle"
+            "links links links";
+        grid-template-columns: 1fr auto auto;
         gap: 4px 8px;
         padding: 6px 0 8px;
     }
@@ -949,16 +1093,34 @@ h1 span {
         grid-area: logo;
     }
 
+    .nav-toggle {
+        display: inline-flex;
+        grid-area: toggle;
+    }
+
     .nav-links {
         grid-area: links;
-        justify-content: space-between;
-        gap: 2px;
+        display: none;
+        width: min(190px, 100%);
+        justify-self: end;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 8px;
+        border: 1px solid rgba(255, 255, 255, .16);
+        border-radius: 12px;
+        background: rgba(7, 24, 39, .94);
+    }
+
+    .navigation.is-open .nav-links {
+        display: flex;
     }
 
     .nav-link {
-        gap: 3px;
-        padding: 6px 3px;
-        font-size: 10px;
+        gap: 7px;
+        justify-content: flex-start;
+        padding: 8px 10px;
+        font-size: 13px;
     }
 
     .nav-link svg {
@@ -1031,10 +1193,23 @@ h1 span {
         padding: 0 0 58px;
     }
 
+    .work-copy {
+        display: block;
+        text-align: center;
+    }
+
+    .work > .section-heading h1 {
+        color: var(--blue);
+    }
+
     .photo-gallery {
         width: calc(100% - 28px);
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .gallery-secondary {
+        display: none;
     }
 
     .service-card {
@@ -1044,8 +1219,8 @@ h1 span {
     .gallery-track,
     .gallery-track.is-carousel {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 22px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
         min-height: 0;
     }
 
@@ -1053,35 +1228,17 @@ h1 span {
     .gallery-track.is-carousel .gallery-slide.is-visible,
     .gallery-track.is-carousel .gallery-slide.is-current {
         display: block;
-        width: 75%;
-        max-width: 540px;
+        width: 100%;
+        max-width: none;
         height: auto;
+        aspect-ratio: 4 / 5;
         flex: auto;
         opacity: 1;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .gallery-track.has-focused-photo .gallery-slide {
-        filter: blur(2px);
-        opacity: .62;
-        transition: filter .2s ease, opacity .2s ease, transform .2s ease;
-    }
-
-    .gallery-track.has-focused-photo .gallery-slide.is-focused {
-        z-index: 2;
-        filter: none;
-        opacity: 1;
-        transform: scale(1.32);
-        box-shadow: 0 16px 38px rgba(16, 43, 70, .28);
+        margin: 0;
     }
 
     .gallery-slide[role="button"] {
-        cursor: zoom-in;
-    }
-
-    .gallery-slide.is-focused {
-        cursor: zoom-out;
+        cursor: pointer;
     }
 
     .gallery-slide:focus-visible {
@@ -1090,9 +1247,9 @@ h1 span {
     }
 
     .gallery-slide img {
-        height: auto;
-        max-height: 680px;
-        object-fit: contain;
+        height: 100%;
+        max-height: none;
+        object-fit: cover;
     }
 
     .gallery-arrow {
@@ -1145,6 +1302,39 @@ h1 span {
     .site-footer {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .home-contact-details {
+        display: grid;
+        width: 100%;
+        gap: 8px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, .18);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, .04);
+    }
+
+    .home-contact-details h2 {
+        margin: 0;
+        color: var(--white);
+        font-size: 16px;
+    }
+
+    .home-contact-details a {
+        display: grid;
+        color: #a9e8ef;
+        overflow-wrap: anywhere;
+    }
+
+    .home-contact-details a span {
+        color: #d5e0e9;
+        font-size: 10px;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+
+    .home-footer-email {
+        display: none;
     }
 }
 

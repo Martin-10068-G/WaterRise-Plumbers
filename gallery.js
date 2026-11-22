@@ -1,19 +1,37 @@
 const gallery = document.querySelector("[data-gallery]");
 
 if (gallery) {
+    const carousel = gallery.querySelector(".gallery-carousel");
     const track = gallery.querySelector(".gallery-track");
     const slides = Array.from(track.querySelectorAll(".gallery-slide"));
+    const carouselSlides = slides;
+    const secondaryTrack = document.createElement("div");
+    secondaryTrack.className = "gallery-secondary";
+    secondaryTrack.setAttribute("role", "group");
+    secondaryTrack.setAttribute("aria-label", "More project photos");
     const previousButton = gallery.querySelector(".gallery-previous");
     const nextButton = gallery.querySelector(".gallery-next");
     const counter = document.querySelector("[data-gallery-count]");
+    counter.after(secondaryTrack);
     const mobileView = window.matchMedia("(max-width: 760px)");
-    let currentIndex = 0;
+    let carouselIndex = 0;
+    let viewerIndex = 0;
+    let viewerTrigger = null;
     let lastTapAt = 0;
     let lastTappedSlide = null;
     let lastTouchTapAt = 0;
     let lastTouchTappedSlide = null;
+    const doubleTapDelay = 500;
 
     track.classList.add("is-carousel");
+    slides.forEach((slide, index) => {
+        slide.classList.add(`gallery-photo-${index + 1}`);
+    });
+    const extraCards = slides.map((slide, index) => {
+        const card = slide.cloneNode(true);
+        card.dataset.galleryIndex = String(index);
+        return card;
+    });
 
     const viewer = document.createElement("div");
     viewer.className = "gallery-viewer";
@@ -42,16 +60,16 @@ if (gallery) {
     const nextViewerButton = viewer.querySelector(".viewer-next");
 
     const updateViewer = () => {
-        const slide = slides[currentIndex];
+        const slide = slides[viewerIndex];
         const image = slide.querySelector("img");
         viewerImage.src = image.currentSrc || image.src;
         viewerImage.alt = image.alt;
         viewerCaption.textContent = slide.querySelector("figcaption").textContent.trim();
     };
 
-    const openViewer = (index) => {
-        currentIndex = index;
-        renderGallery();
+    const openViewer = (index, trigger = document.activeElement) => {
+        viewerIndex = index;
+        viewerTrigger = trigger;
         updateViewer();
         viewer.hidden = false;
         document.body.classList.add("gallery-viewer-open");
@@ -61,37 +79,22 @@ if (gallery) {
     const closeViewer = () => {
         viewer.hidden = true;
         document.body.classList.remove("gallery-viewer-open");
-        slides[currentIndex].focus();
+        if (viewerTrigger?.isConnected) {
+            viewerTrigger.focus();
+        }
     };
 
     const changeViewerPhoto = (direction) => {
-        currentIndex = (currentIndex + direction + slides.length) % slides.length;
-        renderGallery();
+        viewerIndex = (viewerIndex + direction + slides.length) % slides.length;
         updateViewer();
     };
 
     const togglePhotoFocus = (slide) => {
-        if (!mobileView.matches) {
-            const selectedIndex = slides.indexOf(slide);
-            if (selectedIndex !== currentIndex) {
-                currentIndex = selectedIndex;
-                renderGallery();
-            }
-            return;
+        const selectedIndex = carouselSlides.indexOf(slide);
+        if (selectedIndex >= 0 && selectedIndex !== carouselIndex) {
+            carouselIndex = selectedIndex;
+            renderGallery();
         }
-
-        const shouldFocus = !slide.classList.contains("is-focused");
-        slides.forEach((photo) => {
-            photo.classList.remove("is-focused");
-            photo.setAttribute("aria-pressed", "false");
-        });
-
-        if (shouldFocus) {
-            slide.classList.add("is-focused");
-            slide.setAttribute("aria-pressed", "true");
-        }
-
-        track.classList.toggle("has-focused-photo", shouldFocus);
     };
 
     const renderGallery = () => {
@@ -102,6 +105,7 @@ if (gallery) {
         if (mobileView.matches) {
             track.replaceChildren(...slides);
             slides.forEach((slide) => slide.classList.add("is-visible"));
+            secondaryTrack.replaceChildren();
             counter.textContent = `${slides.length} photos — scroll down to view all.`;
             return;
         }
@@ -113,15 +117,16 @@ if (gallery) {
         });
 
         const visibleSlides = [-2, -1, 0, 1, 2].map((offset) => {
-            const index = (currentIndex + offset + slides.length) % slides.length;
-            const slide = slides[index];
+            const index = (carouselIndex + offset + carouselSlides.length) % carouselSlides.length;
+            const slide = carouselSlides[index];
             slide.classList.add(Math.abs(offset) === 1 ? "is-adjacent" : "is-outer");
             return slide;
         });
         track.replaceChildren(...visibleSlides);
         visibleSlides.forEach((slide) => slide.classList.add("is-visible"));
-        slides[currentIndex].classList.add("is-current");
-        counter.textContent = `Photo ${currentIndex + 1} of ${slides.length}`;
+        carouselSlides[carouselIndex].classList.add("is-current");
+        secondaryTrack.replaceChildren(...extraCards);
+        counter.textContent = `Carousel photo ${carouselIndex + 1} of ${carouselSlides.length} · ${slides.length} project photos`;
     };
 
     const onSlideClick = (event) => {
@@ -132,16 +137,18 @@ if (gallery) {
         if (slide) {
             const now = Date.now();
             const selectedIndex = slides.indexOf(slide);
-            if (event.detail > 1 || (event.detail > 0 && lastTappedSlide === slide && now - lastTapAt < 400)) {
+            if (event.detail > 1 || (event.detail > 0 && lastTappedSlide === slide && now - lastTapAt < doubleTapDelay)) {
                 event.preventDefault();
                 lastTapAt = 0;
                 lastTappedSlide = null;
-                openViewer(selectedIndex);
+                openViewer(selectedIndex, slide);
                 return;
             }
             lastTapAt = now;
             lastTappedSlide = slide;
-            togglePhotoFocus(slide);
+            if (!mobileView.matches) {
+                togglePhotoFocus(slide);
+            }
         }
     };
 
@@ -154,10 +161,10 @@ if (gallery) {
             return;
         }
         const now = Date.now();
-        if (lastTouchTappedSlide === slide && now - lastTouchTapAt < 400) {
+        if (lastTouchTappedSlide === slide && now - lastTouchTapAt < doubleTapDelay) {
             lastTouchTapAt = 0;
             lastTouchTappedSlide = null;
-            openViewer(slides.indexOf(slide));
+            openViewer(slides.indexOf(slide), slide);
             return;
         }
         lastTouchTapAt = now;
@@ -169,17 +176,36 @@ if (gallery) {
         const slide = event.target.closest(".gallery-slide");
         if (slide && (event.key === "Enter" || event.key === " ")) {
             event.preventDefault();
-            togglePhotoFocus(slide);
+            if (mobileView.matches) {
+                openViewer(slides.indexOf(slide), slide);
+            } else {
+                togglePhotoFocus(slide);
+            }
+        }
+    });
+
+    secondaryTrack.addEventListener("click", (event) => {
+        const slide = event.target.closest(".gallery-slide");
+        if (slide) {
+            openViewer(Number(slide.dataset.galleryIndex), slide);
+        }
+    });
+
+    secondaryTrack.addEventListener("keydown", (event) => {
+        const slide = event.target.closest(".gallery-slide");
+        if (slide && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            openViewer(Number(slide.dataset.galleryIndex), slide);
         }
     });
 
     previousButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + slides.length - 1) % slides.length;
+        carouselIndex = (carouselIndex + carouselSlides.length - 1) % carouselSlides.length;
         renderGallery();
     });
 
     nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % slides.length;
+        carouselIndex = (carouselIndex + 1) % carouselSlides.length;
         renderGallery();
     });
 

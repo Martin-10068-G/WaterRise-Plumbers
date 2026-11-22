@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Water Rise Plumbing Solution provides water supply, sanitary installation, repairs, drainage, and plumbing services.">
-    <title>Water Rise Plumbing Solution | Home</title>
+    <title>Water Rise Plumbing Solutions/Home</title>
+    <link rel="icon" type="image/png" href="logo%20background.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="home-page">
@@ -13,7 +14,12 @@
             <a class="nav-logo" href="index.html" aria-label="Water Rise Plumbing Solution home">
                 <img src="logo%20background.png" alt="Water Rise Plumbing Solution">
             </a>
-            <div class="nav-links">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="primary-navigation">
                 <a class="nav-link active" href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/></svg><span>Home</span></a>
                 <a class="nav-link" href="services.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 13l-3-3z"/></svg><span>Services</span></a>
                 <a class="nav-link" href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>About</span></a>
@@ -33,66 +39,79 @@
                 <h1 class="page-title">Plumbing in action</h1>
                 <p>These are photos of Water Rise projects.</p>
             </div>
-            <div class="photo-gallery" data-gallery>
-                <button class="gallery-arrow gallery-previous" type="button" aria-label="Show previous photo">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 4-8 8 8 8"/></svg>
-                </button>
-                <div class="gallery-track">
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumber with tools photo">
-                        <img src="images/work-01.jpg" alt="Plumber wearing safety gear and holding a pipe wrench" width="1400" height="2100">
-                        <figcaption>Pump Installation</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumbing tools photo">
-                        <img src="images/work-02.jpg" alt="Close-up of a pipe wrench" width="1400" height="2100" loading="lazy">
-                        <figcaption>Installation of Waste Water Control Panel</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumber at work photo">
-                        <img src="images/work-03.jpg" alt="Plumber wearing protective gear, ready for work" width="1400" height="2100" loading="lazy">
-                        <figcaption>Wash Hand Basins Installation
-                        </figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumber with a wrench photo">
-                        <img src="images/work-04.jpg" alt="Construction worker wearing safety gear and holding a wrench" width="1400" height="2100" loading="lazy">
-                        <figcaption>Kitchen Sink Installation</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge boiler maintenance photo">
-                        <img src="images/work-05.jpg" alt="Technician adjusting a boiler system" width="1400" height="933" loading="lazy">
-                        <figcaption>Waste Water Recycling Works</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge water pump service photo">
-                        <img src="images/work-06.jpg" alt="Technician working on a water pump" width="1400" height="2100" loading="lazy">
-                        <figcaption>Water tank installation</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge pipe repair photo">
-                        <img src="images/work-07.jpg" alt="Plumber repairing a pipe with a wrench indoors" width="1400" height="2100" loading="lazy">
-                        <figcaption>Urinal bowls and dividers installation</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge pipe installation photo">
-                        <img src="images/work-08.jpg" alt="Hands fitting pipework beneath a fixture" width="1400" height="933" loading="lazy">
-                        <figcaption>Pipe installation</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge water pipework photo">
-                        <img src="images/work-09.jpg" alt="Worker assembling a water pipe outdoors" width="1400" height="2100" loading="lazy">
-                        <figcaption>Laboratory sinks water installation</figcaption>
-                    </figure>
-                    <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge pipes and valves photo">
-                        <img src="images/work-10.jpg" alt="Industrial pipes fitted with colorful valves" width="1400" height="933" loading="lazy">
-                        <figcaption>Squattish W.C Installations</figcaption>
-                    </figure>
-                </div>
-                <button class="gallery-arrow gallery-next" type="button" aria-label="Show next photo">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 4 8 8-8 8"/></svg>
-                </button>
+            <div class="work-copy">
+                <p>Water Rise Plumbing Solution provides water supply, sanitary installation, drainage, repair, and maintenance services for homes and businesses.</p>
+                <p>We aim to understand the job, explain the options, and carry out the work with care. From a plumbing repair to a new fixture installation, get in touch to discuss your needs.</p>
             </div>
-            <p class="gallery-count" data-gallery-count aria-live="polite">Photo 1 of 10</p>
+            <div class="photo-gallery" data-gallery>
+                <div class="gallery-carousel">
+                    <button class="gallery-arrow gallery-previous" type="button" aria-label="Show previous photo">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 4-8 8 8 8"/></svg>
+                    </button>
+                    <div class="gallery-track">
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumber with tools photo">
+                            <img src="images/work-01.jpg" alt="Plumber wearing safety gear and holding a pipe wrench" width="1400" height="2100">
+                            <figcaption>Pump Installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumbing tools photo">
+                            <img src="images/work-02.jpg" alt="Close-up of a pipe wrench" width="1400" height="2100" loading="lazy">
+                            <figcaption>Installation of Waste Water Control Panel</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumber at work photo">
+                            <img src="images/work-03.jpg" alt="Plumber wearing protective gear, ready for work" width="1400" height="2100" loading="lazy">
+                            <figcaption>Wash Hand Basins Installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge plumber with a wrench photo">
+                            <img src="images/work-04.jpg" alt="Construction worker wearing safety gear and holding a wrench" width="1400" height="2100" loading="lazy">
+                            <figcaption>Kitchen Sink Installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge boiler maintenance photo">
+                            <img src="images/work-05.jpg" alt="Technician adjusting a boiler system" width="1400" height="933" loading="lazy">
+                            <figcaption>Waste Water Recycling Works</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge water pump service photo">
+                            <img src="images/work-06.jpg" alt="Technician working on a water pump" width="1400" height="2100" loading="lazy">
+                            <figcaption>Water tank installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge pipe repair photo">
+                            <img src="images/work-07.jpg" alt="Plumber repairing a pipe with a wrench indoors" width="1400" height="2100" loading="lazy">
+                            <figcaption>Urinal bowls and dividers installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge pipe installation photo">
+                            <img src="images/work-08.jpg" alt="Hands fitting pipework beneath a fixture" width="1400" height="933" loading="lazy">
+                            <figcaption>Pipe installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge water pipework photo">
+                            <img src="images/work-09.jpg" alt="Worker assembling a water pipe outdoors" width="1400" height="2100" loading="lazy">
+                            <figcaption>Laboratory sinks water installation</figcaption>
+                        </figure>
+                        <figure class="gallery-slide" role="button" tabindex="0" aria-pressed="false" aria-label="Enlarge pipes and valves photo">
+                            <img src="images/work-10.jpg" alt="Industrial pipes fitted with colorful valves" width="1400" height="933" loading="lazy">
+                            <figcaption>Squattish W.C Installations</figcaption>
+                        </figure>
+                    </div>
+                    <button class="gallery-arrow gallery-next" type="button" aria-label="Show next photo">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 4 8 8-8 8"/></svg>
+                    </button>
+                </div>
+            </div>
+            <p class="gallery-count" data-gallery-count aria-live="polite">Carousel photo 1 of 10 · 10 project photos</p>
         </section>
     </main>
 
     <footer class="site-footer">
+        <section class="home-contact-details" aria-labelledby="home-contact-heading">
+            <h2 id="home-contact-heading">Contact Water Rise</h2>
+            <a href="tel:0704067048"><span>Call</span>0704067048</a>
+            <a href="mailto:wateriseplumbers@gmail.com"><span>Email</span>wateriseplumbers@gmail.com</a>
+            <a href="https://www.facebook.com/profile.php?id=61596037216052&amp;mibextid=rS40aB7S9Ucbxw6v" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/waterrise/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </section>
         <p>© <span id="year">2026</span> Water Rise Plumbing Solution</p>
-        <a href="mailto:wateriseplumbers@gmail.com">wateriseplumbers@gmail.com</a>
+        <a class="home-footer-email" href="mailto:wateriseplumbers@gmail.com">wateriseplumbers@gmail.com</a>
         <a href="index.html">Back to home ↑</a>
     </footer>
+    <script src="nav.js" defer></script>
     <script src="gallery.js" defer></script>
 </body>
 </html>

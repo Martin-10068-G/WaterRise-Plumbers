@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn about Water Rise Plumbing Solution and our plumbing services.">
-    <title>About Us | Water Rise Plumbing Solution</title>
+    <title>About Us/Water Rise Plumbing Solution</title>
+    <link rel="icon" type="image/png" href="logo%20background.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="about-page-body">
@@ -13,7 +14,12 @@
             <a class="nav-logo" href="index.html" aria-label="Water Rise Plumbing Solution home">
                 <img src="logo%20background.png" alt="Water Rise Plumbing Solution">
             </a>
-            <div class="nav-links">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="primary-navigation">
                 <a class="nav-link" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/></svg><span>Home</span></a>
                 <a class="nav-link" href="services.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 13l-3-3z"/></svg><span>Our Services</span></a>
                 <a class="nav-link active" href="about.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>About us</span></a>
@@ -48,5 +54,6 @@
         <a href="mailto:wateriseplumbers@gmail.com">wateriseplumbers@gmail.com</a>
         <a href="index.html">Back to home ↑</a>
     </footer>
+    <script src="nav.js" defer></script>
 </body>
 </html>
